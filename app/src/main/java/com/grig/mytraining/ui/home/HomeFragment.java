@@ -2,7 +2,7 @@ package com.grig.mytraining.ui.home;
 
 import static androidx.recyclerview.widget.RecyclerView.OVER_SCROLL_NEVER;
 import static com.grig.mytraining.MyApplication.getAppContext;
-import static java.time.LocalDate.now;
+import static org.threeten.bp.LocalDate.now;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -38,7 +38,8 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter;
 import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter;
 
-import java.time.LocalDate;
+import org.threeten.bp.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -81,7 +82,6 @@ public class HomeFragment extends Fragment {
 
     private void initAll() {
         progressBar.setVisibility(View.VISIBLE);
-        // При клике запускаем анимацию
         floatingButtonPlus.setOnClickListener(view1 -> startAnimationFloatingButtons(view1.getContext()));
 
         imageButtonMySettings.setOnClickListener(v -> startActivity(new Intent(v.getContext(), SettingsActivity.class)));
@@ -89,6 +89,7 @@ public class HomeFragment extends Fragment {
             Intent intent = new Intent(v.getContext(), CreateTrainActivity.class);
             startActivity(intent);
         });
+
         floatingButtonNote.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), NotesActivity.class);
             startActivity(intent);
@@ -106,21 +107,29 @@ public class HomeFragment extends Fragment {
         floatingButtonNote.setVisibility(View.INVISIBLE);
         isTurn = false;
     }
-
     private void initCalendar() {
         mcv.setTitleFormatter(new MonthArrayTitleFormatter(getResources().getTextArray(R.array.months)));
+
         mcv.setWeekDayFormatter(new ArrayWeekDayFormatter(getResources().getTextArray(R.array.custom_weekdays)));
+
+        // Добавляем декораторы
+        mcv.addDecorator(new TodayDecorator()); // Декоратор для текущего дня
         mcv.addDecorator(new FullDecorator(MyHelper.MyDBHelper.TrainingDaysFromDB.trainingDays));
-        mcv.addDecorator(new EventDecorator(MyHelper.MyDBHelper.TrainingDaysFromDB.trainingDays));
+        mcv.addDecorator(new EventTrainingDecorator(MyHelper.MyDBHelper.TrainingDaysFromDB.trainingDays));
+
         mcv.setRightArrow(R.drawable.chevron_right);
         mcv.setLeftArrow(R.drawable.chevron_left);
+
         mcv.setOnDateChangedListener((widget, date, selected) -> {
             if (MyHelper.MyDBHelper.TrainingDaysFromDB.trainingDays.contains(date)) {
-                ((MainActivity) getActivity()).switchToChronologyFromCalendar(LocalDate.of(date.getYear(), date.getMonth(), date.getDay()).toString());
+                ((MainActivity) getActivity()).switchToChronologyFromCalendar(
+                        LocalDate.of(date.getYear(), date.getMonth(), date.getDay()).toString()
+                );
             }
         });
+
         mcv.setOnMonthChangedListener((widget, date) -> {
-            if (date.getMonth() <= currentDate.getMonth().getValue()
+            if (date.getMonth() <= currentDate.getMonthValue()
                     && date.getYear() == currentDate.getYear() && !isQueryViewPager) {
                 isQueryCalendar = true;
                 viewPager2.setCurrentItem(date.getMonth() - 1);
@@ -132,24 +141,27 @@ public class HomeFragment extends Fragment {
 
     public void initViewPager() {
         List<String> months = Arrays.asList(getResources().getStringArray(R.array.months));
+
         List<SliderStatItem> stats = new ArrayList<>();
         List<Integer> monthsTrainings = new ArrayList<>();
         for (CalendarDay calendarDay : MyHelper.MyDBHelper.TrainingDaysFromDB.trainingDays) {
             if (calendarDay.getYear() == currentDate.getYear()) {
-                System.out.println(calendarDay.getMonth());
-                monthsTrainings.add(calendarDay.getMonth());
+                // Получаем месяц (1-12) и корректируем индекс для списка (0-11)
+                monthsTrainings.add(calendarDay.getMonth() - 1);
             }
         }
 
-        for (int i = 0; i < currentDate.getMonth().getValue(); i++)
-            stats.add(new SliderStatItem(months.get(i), String.valueOf(Collections.frequency(monthsTrainings, i + 1))));
 
-        viewPager2.setAdapter(new SliderAdapter(stats, viewPager2));
-        viewPager2.setClipToPadding(false);
+        for (int i = 0; i < currentDate.getMonthValue(); i++) {
+            // Используем i как индекс (0-11), соответствующий массиву
+            stats.add(new SliderStatItem(months.get(i), String.valueOf(Collections.frequency(monthsTrainings, i))));
+        }
+        viewPager2.setAdapter(new SliderAdapter(stats, viewPager2));        viewPager2.setClipToPadding(false);
         viewPager2.setClipChildren(false);
         viewPager2.setOffscreenPageLimit(3);
         viewPager2.getChildAt(0).setOverScrollMode(OVER_SCROLL_NEVER);
-        viewPager2.setCurrentItem(currentDate.getMonth().getValue());
+        viewPager2.setCurrentItem(currentDate.getMonthValue());
+
         viewPager2.setPageTransformer((page, position) -> {
             page.setTranslationX(0);
             float r = 1 - Math.abs(position);
@@ -160,16 +172,16 @@ public class HomeFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                // Если это не запрос календарь, то переворачиваем его, иначе он уже перевернут
                 if (!isQueryCalendar) {
                     isQueryViewPager = true;
                     new Handler().postDelayed(() -> mcv.setCurrentDate(CalendarDay.from(
-                            currentDate.getYear(), position % currentDate.getMonth().getValue() + 1, 1), true), 200);
+                            currentDate.getYear(), position % currentDate.getMonthValue() + 1, 1), true), 200);
                 }
                 isQueryCalendar = false;
             }
         });
     }
+
     private static ArrayList<Drawable> getCalendarDesign() {
         ArrayList<Drawable> designs = new ArrayList<>();
         @SuppressLint("UseCompatLoadingForDrawables") Drawable designDefault = getAppContext().getDrawable(R.drawable.calendar_design_deffault);
@@ -179,15 +191,20 @@ public class HomeFragment extends Fragment {
         return designs;
     }
 
-    private static class EventDecorator implements DayViewDecorator {
+    private static class EventTrainingDecorator implements DayViewDecorator {
         private final HashSet<CalendarDay> mCalendarDayCollection;
 
-        public EventDecorator(HashSet<CalendarDay> calendarDayCollection) {
+        public EventTrainingDecorator(HashSet<CalendarDay> calendarDayCollection) {
             mCalendarDayCollection = calendarDayCollection;
         }
+
         @Override
         public boolean shouldDecorate(CalendarDay day) {
-            return mCalendarDayCollection.contains(day);
+            LocalDate today = LocalDate.now();
+            return mCalendarDayCollection.contains(day) &&
+                    !(day.getYear() == today.getYear()
+                            && day.getMonth() == today.getMonthValue()
+                            && day.getDay() == today.getDayOfMonth());
         }
 
         @Override
@@ -197,9 +214,9 @@ public class HomeFragment extends Fragment {
             ImageSpan span = new ImageSpan(d, ImageSpan.ALIGN_BASELINE);
             view.addSpan(new TextAppearanceSpan(getAppContext(), R.style.CalendarTVStyle));
             view.setSelectionDrawable(getCalendarDesign().get(1));
-
         }
     }
+
     private static class FullDecorator implements DayViewDecorator {
         private final HashSet<CalendarDay> mCalendarDayCollection;
 
@@ -209,7 +226,11 @@ public class HomeFragment extends Fragment {
 
         @Override
         public boolean shouldDecorate(CalendarDay day) {
-            return !mCalendarDayCollection.contains(day);
+            LocalDate today = LocalDate.now();
+            return !mCalendarDayCollection.contains(day) &&
+                    !(day.getYear() == today.getYear()
+                            && day.getMonth() == today.getMonthValue()
+                            && day.getDay() == today.getDayOfMonth());
         }
 
         @Override
@@ -218,13 +239,32 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    private class TodayDecorator implements DayViewDecorator {
+        private final CalendarDay today;
+
+        public TodayDecorator() {
+            this.today = CalendarDay.from(LocalDate.now());
+        }
+
+        @Override
+        public boolean shouldDecorate(CalendarDay day) {
+            return day.equals(today);
+        }
+
+        @Override
+        public void decorate(DayViewFacade view) {
+            Drawable d = ContextCompat.getDrawable(getAppContext(), R.drawable.dumbbell4);
+            d.setBounds(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight());
+            ImageSpan span = new ImageSpan(d, ImageSpan.ALIGN_BASELINE);
+            view.addSpan(new TextAppearanceSpan(getAppContext(), R.style.CalendarTodayStyle));
+            view.setSelectionDrawable(getCalendarDesign().get(1));
+        }
+    }
+
     private void startAnimationFloatingButtons(@NonNull Context context) {
         if (!isTurn) {
-            // анимация floatingButtonPlus
             animButtonPlus = AnimationUtils.loadAnimation(context, R.anim.rotate_plus_to_cross);
-            // анимация floatingButtonDumbbell
             animButtonDumbbell = AnimationUtils.loadAnimation(context, R.anim.anim_dumbbell_appear);
-            // анимация floatingButtonNote
             animButtonNoteRight = AnimationUtils.loadAnimation(context, R.anim.anim_note_appear_roteate_right);
             animButtonNoteLeft = AnimationUtils.loadAnimation(context, R.anim.anim_note_appear_rotete_left);
             animButtonNoteBack = AnimationUtils.loadAnimation(context, R.anim.anim_note_appear_rotate_back);
@@ -252,25 +292,20 @@ public class HomeFragment extends Fragment {
                     floatingButtonDumbbell.startAnimation(animButtonDumbbell);
             }, 160);
 
+
             floatingButtonDumbbell.setVisibility(View.VISIBLE);
             floatingButtonNote.setVisibility(View.VISIBLE);
         } else {
-            // анимация floatingButtonPlus
             animButtonPlus = AnimationUtils.loadAnimation(context, R.anim.rotate_cross_to_plus);
-            // анимация floatingButtonDumbbell
             animButtonDumbbell = AnimationUtils.loadAnimation(context, R.anim.anim_dumbbell_disappear);
-            // анимация floatingButtonNote
             animButtonNote = AnimationUtils.loadAnimation(context, R.anim.anim_note_disappear);
             floatingButtonNote.startAnimation(animButtonNote);
             floatingButtonDumbbell.startAnimation(animButtonDumbbell);
 
             floatingButtonDumbbell.setVisibility(View.INVISIBLE);
             floatingButtonNote.setVisibility(View.INVISIBLE);
-
         }
-        // устанавливаем противоположное значение isTurn
         isTurn = !isTurn;
-        // Запускаем анимации
         floatingButtonPlus.startAnimation(animButtonPlus);
     }
 }

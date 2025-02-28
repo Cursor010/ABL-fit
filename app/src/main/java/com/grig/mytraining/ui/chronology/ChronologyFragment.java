@@ -49,8 +49,6 @@ public class ChronologyFragment extends Fragment {
         progressBar = view.findViewById(R.id.progressBarChronology);
         tvHeader = view.findViewById(R.id.tvHeaderChron);
         System.out.println(MyHelper.MyDBHelper.TrainingDaysFromDB.dateForChronology);
-//        FragmentFilterChron fragmentFilterChron = new FragmentFilterChron();
-//        fragmentFilterChron.show(requireActivity().getSupportFragmentManager(), "bottom");
         view.findViewById(R.id.filterChron).setOnClickListener(v -> {
             createBottomSheetDialog(view);
         });
@@ -87,21 +85,6 @@ public class ChronologyFragment extends Fragment {
 
         bottomSheetDialog.setContentView(bottomView);
         bottomSheetDialog.show();
-
-        //        autoCompleteTextView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                if (hasFocus) {
-//                    bottomView.findViewById(R.id.button2).setVisibility(View.VISIBLE);
-//                    autoCompleteTextView.startAnimation(
-//                            AnimationUtils.loadAnimation(getContext(), R.anim.slide_auto_compleate_tv));
-//                    autoCompleteTextView.setTranslationX(0);
-//                }
-//                else
-//                    bottomView.findViewById(R.id.button2).setVisibility(View.INVISIBLE);
-//
-//            }
-//        });
     }
 
     private void showResults(String timeInterval, String exercise, boolean isSwitchTraining, boolean isSwitchRecord) {
@@ -124,29 +107,6 @@ public class ChronologyFragment extends Fragment {
                         "SELECT date, exercise, weight, additional_info, is_record " +
                                 "FROM training WHERE date BETWEEN ? AND ? ORDER BY date",
                         new String[]{dateStart, dateEnd});
-                //            if (isSwitchTraining && isSwitchRecord)
-                //                cursor = MyHelper.MyDBHelper.getDatabase().rawQuery(
-                //                        "SELECT date, exercise, weight, additional_info, is_record " +
-                //                                "FROM training WHERE date BETWEEN ? AND ? ORDER BY date",
-                //                        new String[]{dateStart, dateEnd});
-                //            else if (isSwitchTraining && !isSwitchRecord) {
-                //                cursor = MyHelper.MyDBHelper.getDatabase().rawQuery(
-                //                        "SELECT date, exercise, weight, additional_info, is_record " +
-                //                                "FROM training WHERE date BETWEEN ? AND ? ORDER BY date",
-                //                        new String[]{dateStart, dateEnd});
-                //            }
-                //            else if (!isSwitchTraining && isSwitchRecord)
-                //                cursor = MyHelper.MyDBHelper.getDatabase().rawQuery(
-                //                        "SELECT date, exercise, weight, additional_info, is_record " +
-                //                                "FROM training WHERE date BETWEEN ? AND ? AND is_record = ? ORDER BY date",
-                //                        new String[]{dateStart, dateEnd, "1"});
-                //            else {
-                //                cursor = MyHelper.MyDBHelper.getDatabase().rawQuery(
-                //                        "SELECT date, exercise, weight, additional_info, is_record " +
-                //                                "FROM training WHERE date BETWEEN ? AND ? AND is_record = ? ORDER BY date",
-                //                        new String[]{dateStart, dateEnd, "8"});
-                //                Toast.makeText(getContext(), "Ну как хочешь, зырь теперь на пустой лист\uD83D\uDE0E", Toast.LENGTH_LONG).show();
-                //            }
             } else
                 cursor = MyHelper.MyDBHelper.getDatabase().rawQuery(
                         "SELECT date, exercise, weight, additional_info, is_record FROM training " +
@@ -168,7 +128,6 @@ public class ChronologyFragment extends Fragment {
             Toast.makeText(getContext(), "Ну как хочешь, зырь теперь на пустой лист\uD83D\uDE0E", Toast.LENGTH_LONG).show();
 
         if (exercise.equals("")) {
-//            tvHeader.setText("Результаты за " + timeInterval.toLowerCase(Locale.ROOT));
             recyclerView.setAdapter(new TrainingAdapterChronology(trainings, new TrainingAdapterChronology.OnItemClickListener() {
                 @Override
                 public void onTrainingClick(Training training) {

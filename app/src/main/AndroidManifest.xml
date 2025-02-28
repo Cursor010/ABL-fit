@@ -81,6 +81,10 @@
             android:name=".ui.home.CreateTrainActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.home.CreateNextTrain"
+            android:exported="false"
+            android:theme="@style/Theme.MyTraining" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
 

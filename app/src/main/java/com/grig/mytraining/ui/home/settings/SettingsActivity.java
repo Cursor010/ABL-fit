@@ -31,45 +31,6 @@ public class SettingsActivity extends AppCompatActivity {
         );
         findViewById(R.id.importDataButton).setOnClickListener(view -> importDB());
 
-//        findViewById(R.id.shareDB).setOnClickListener(v -> {
-////            Intent intent = new Intent(Intent.ACTION_SEND);
-////            intent.setType("storage/emulated/0/MyTrainingBackupDB/trainingDBBackup");
-////            startActivity(intent);
-////            Intent shareIntent = new Intent();
-////            shareIntent.setAction(Intent.ACTION_SEND);
-////            shareIntent.putExtra(Intent.EXTRA_STREAM, uriToImage);
-////            shareIntent.setType("image/jpeg");
-////            startActivity(Intent.createChooser(shareIntent, null));
-////            sendIntent.setType("*/*");
-////
-////            Intent shareIntent = Intent.createChooser(sendIntent, null);
-////            startActivity(shareIntent);
-////            Intent shareIntent = new Intent();
-////            shareIntent.setAction(Intent.ACTION_SEND);
-////            Toast.makeText(this, String.valueOf(new File("storage/emulated/0/MyTrainingBackupDB/trainingDBBackup").exists()), Toast.LENGTH_SHORT).show();
-////            shareIntent.putExtra(Intent.EXTRA, "storage/emulated/0/MyTrainingBackupDB/trainingDBBackup");
-////            shareIntent.setType("*/*");
-////            startActivity(Intent.createChooser(shareIntent, null)
-//        }));
-
-
-//            Intent intent = new Intent("com.grig.mytraining.ACTION_RETURN_FILE");
-//            intent.setType("application/pdf");
-//            startActivity(intent);
-//            Intent intentShareFile = new Intent(Intent.ACTION_SEND);
-////            File fileWithinMyDir = new File(Environment.getExternalStorageDirectory() + "/MyTrainingBackupDB/trainingDBbackup");
-//            File fileWithinMyDir = new File("storage/emulated/0/MyTrainingBackupDB", "trainingDBBackup");
-//            if(fileWithinMyDir.exists()) {
-//                intentShareFile.setType("application/pdf");
-//                    Uri contentUri = FileProvider.getUriForFile(getApplicationContext(), BuildConfig.APPLICATION_ID + ".fileProvider", fileWithinMyDir);
-//                    intentShareFile.putExtra(Intent.EXTRA_STREAM, contentUri);
-//                    intentShareFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//                intentShareFile.putExtra (Intent.EXTRA_SUBJECT, "Отправить файл ...");
-//                intentShareFile.putExtra (Intent.EXTRA_TEXT, "Отправить файл ...");
-//                startActivity(Intent.createChooser(intentShareFile, "Share File"));
-//            } else System.out.println(fileWithinMyDir);
-//        });
-
         findViewById(R.id.delExerciseButton).setOnClickListener(view -> {
             Intent intent = new Intent(SettingsActivity.this, DeleteExerciseDialog.class);
             startActivity(intent);
@@ -111,7 +72,6 @@ public class SettingsActivity extends AppCompatActivity {
                         inputStream = new FileInputStream(currentDB).getChannel();
                         outputStream = new FileOutputStream(copyDB).getChannel();
                         outputStream.transferFrom(inputStream, 0, inputStream.size());
-//                            FileUtils.copy(new FileInputStream(currentDB), new FileOutputStream(copyDB));
                         Toast.makeText(this, "Успешно!", Toast.LENGTH_SHORT).show();
                     } catch (IOException ignored) {
                     }

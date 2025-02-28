@@ -96,46 +96,6 @@ public class StatisticsFragment extends Fragment {
         return view;
     }
 
-//    public void generateTrainingAdapter() {
-//        LocalDate dateStart = LocalDate.now();
-//        LocalDate dateEnd = LocalDate.now();
-//        String selectedExercise = exercisesACTV.getText().toString();
-//
-//        switch (spinnerTimeInterval.getSelectedItem().toString()) {
-//            case "неделю":
-//                dateStart = dateStart.minusWeeks(1);
-//                break;
-//            case "две недели":
-//                dateStart = dateStart.minusWeeks(2);
-//                break;
-//            case "месяц":
-//                dateStart = dateStart.minusMonths(1);
-//                break;
-//            case "всё время":
-//                dateStart = dateStart.minusYears(10);
-//                break;
-//        }
-//
-//        ArrayList<Object> trainings = new ArrayList<>();
-//
-//        trainings.add(new Training("Дата", "Упражнение", "Вес", "Результат"));
-//        Cursor cursorT = MyHelper.MyDBHelper.getTrainingCursor(new String[] {"date", "weight", "additional_info", "is_record"},
-//                "date BETWEEN ? AND ? AND exercise = ?",
-//                new String[] {dateStart.toString(), dateEnd.toString(), selectedExercise}, "date");
-//        if (cursorT.moveToNext()){
-//            do {
-//                if (cursorT.getString(3) == null)
-//                    trainings.add(new Training(cursorT.getString(0).substring(2),
-//                            null, cursorT.getString(1), cursorT.getString(2)));
-//                else
-//                    trainings.add(new Record(cursorT.getString(0).substring(2),
-//                            null, cursorT.getString(1), cursorT.getString(2)));
-//            } while (cursorT.moveToNext());
-//        }
-//        cursorT.close();
-//        MyHelper.MyDBHelper.TrainingAdapters.trainingAdapterStatistics = new TrainingAdapterStatistics(trainings);
-//    }
-
     public void showResults() {
         System.out.println("show");
         String[] dates = MyHelper.MyDBHelper.getDatesTimeInterval(spinnerTimeInterval.getSelectedItem().toString());
@@ -160,7 +120,6 @@ public class StatisticsFragment extends Fragment {
         }
         cursorT.close();
 
-//        recyclerView.setAdapter(new TrainingAdapterStatistics(trainings));
         progressBar.setVisibility(View.INVISIBLE);
     }
 }

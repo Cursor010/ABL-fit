@@ -24,50 +24,82 @@ public class DialogReplaceExercise extends AppCompatActivity {
     DBHelper dbHelper;
     SQLiteDatabase database;
     String newName, oldName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dialog_replace_exercise);
 
+        // 1. Инициализация базы данных
+        dbHelper = new DBHelper(this);
+        database = dbHelper.getWritableDatabase();
+
         spinnerReplaceExercise = findViewById(R.id.spinnerReplaceExercise);
         replaceExerciseDialogNewName = findViewById(R.id.replaceExerciseDialogNewName);
         buttonReplaceExercise = findViewById(R.id.buttonReplaceExerciseDialog);
 
-        arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),
-                R.layout.spinner_list_item, MyHelper.MyDBHelper.getExercises());
+        arrayAdapter = new ArrayAdapter<>(this,
+                R.layout.spinner_list_item,
+                MyHelper.MyDBHelper.getExercises());
         arrayAdapter.setDropDownViewResource(R.layout.spinner_drop_down);
         spinnerReplaceExercise.setAdapter(arrayAdapter);
 
         buttonReplaceExercise.setOnClickListener(view -> {
-            newName = replaceExerciseDialogNewName.getText().toString();
-            oldName = spinnerReplaceExercise.getSelectedItem().toString();
+            newName = replaceExerciseDialogNewName.getText().toString().trim();
+            oldName = spinnerReplaceExercise.getSelectedItem().toString().trim();
 
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(DBHelper.EXERCISES_KEY_EXERCISE, newName);
-
-            database.update(DBHelper.TABLE_EXERCISES, contentValues, "exercise = ?",
-                    new String[] {oldName});
-            Cursor cursorT = database.query(DBHelper.TABLE_TRAINING, null, null, null, null, null, null);
-            if (cursorT.moveToNext()){
-                int dateIndex = cursorT.getColumnIndex(DBHelper.TRAINING_KEY_DATE);
-                int exerciseIndex = cursorT.getColumnIndex(DBHelper.TRAINING_KEY_EXERCISE);
-                int additionalInfoIndex = cursorT.getColumnIndex(DBHelper.TRAINING_KEY_ADDITIONAL_INFO);
-                int weightIndex = cursorT.getColumnIndex(DBHelper.TRAINING_KEY_WEIGHT);
-
-                do {
-                    if ((cursorT.getString(exerciseIndex).equals(oldName))) {
-                        ContentValues contentValues1 = new ContentValues();
-                        contentValues1.put(DBHelper.TRAINING_KEY_DATE, cursorT.getString(dateIndex));
-                        contentValues1.put(DBHelper.TRAINING_KEY_EXERCISE, newName);
-                        contentValues1.put(DBHelper.TRAINING_KEY_ADDITIONAL_INFO, cursorT.getString(additionalInfoIndex));
-                        contentValues1.put(DBHelper.TRAINING_KEY_WEIGHT, cursorT.getString(weightIndex));
-                        database.update(DBHelper.TABLE_TRAINING, contentValues1, "exercise = ?",
-                                new String[] {oldName});
-                    }
-                } while (cursorT.moveToNext());
+            // 2. Проверка ввода
+            if (newName.isEmpty()) {
+                Toast.makeText(this, "Введите новое название", Toast.LENGTH_SHORT).show();
+                return;
             }
-    cursorT.close();
-            Toast.makeText(DialogReplaceExercise.this, "Успешно заменено!", Toast.LENGTH_SHORT).show();
+
+            // 3. Проверка существования нового имени
+            if (arrayAdapter.getPosition(newName) != -1) {
+                Toast.makeText(this, "Упражнение уже существует", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            try {
+                database.beginTransaction();
+
+                // 4. Обновление упражнения
+                ContentValues exValues = new ContentValues();
+                exValues.put(DBHelper.EXERCISES_KEY_EXERCISE, newName);
+                int exUpdated = database.update(
+                        DBHelper.TABLE_EXERCISES,
+                        exValues,
+                        DBHelper.EXERCISES_KEY_EXERCISE + " = ?",
+                        new String[]{oldName}
+                );
+
+                if (exUpdated > 0) {
+                    // 5. Массовое обновление тренировок
+                    ContentValues trValues = new ContentValues();
+                    trValues.put(DBHelper.TRAINING_KEY_EXERCISE, newName);
+                    database.update(
+                            DBHelper.TABLE_TRAINING,
+                            trValues,
+                            DBHelper.TRAINING_KEY_EXERCISE + " = ?",
+                            new String[]{oldName}
+                    );
+
+                    database.setTransactionSuccessful();
+                    Toast.makeText(this, "Успешно заменено!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Упражнение не найдено", Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception e) {
+                Toast.makeText(this, "Ошибка: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            } finally {
+                database.endTransaction();
+            }
+
+            // 6. Обновление списка упражнений
+            arrayAdapter.clear();
+            arrayAdapter.addAll(MyHelper.MyDBHelper.getExercises());
+            arrayAdapter.notifyDataSetChanged();
+
             finish();
         });
     }

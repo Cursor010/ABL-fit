@@ -23,9 +23,7 @@
         <item name="android:textColor">#FFFFFF</item>
         <item name="theme">@style/ThemeOverlay.MaterialComponents.MaterialCalendar</item>
         <item name="android:fontFamily">@font/roboto_medium</item>
-        <!--        <item name="background">@drawable/calendar_button_default</item>-->
-        <!--        <item name="background">@drawable/calendar_button_default</item>-->
-    </style>
+     </style>
 
     <style name="CalendarButtonStyleSpec" parent="@style/Widget.AppCompat.Button.Borderless">
         <item name="android:backgroundTint">#1A1A1E</item>
@@ -58,6 +56,12 @@
         <item name="fontFamily">@font/roboto_medium</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/items_bottom_nav</item>
+    </style>
+
+    <style name="CalendarTodayStyle">
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">22sp</item>
     </style>
 
     <style name="DialogStyle" parent="Base.Theme.AppCompat.Dialog.FixedSize">
@@ -96,5 +100,9 @@
     <style name="Widget.MyTraining.AppWidget.InnerView" parent="android:Widget">
         <item name="android:background">?android:attr/colorBackground</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+    <style name="TodayTextAppearance" parent="TextAppearance.MaterialCalendarWidget.Date">
+        <item name="android:textColor">#FF4CAF50</item> <!-- Зеленый цвет -->
+        <item name="android:textSize">16sp</item>
     </style>
 </resources>

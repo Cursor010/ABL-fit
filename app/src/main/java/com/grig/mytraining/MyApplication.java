@@ -1,4 +1,5 @@
 package com.grig.mytraining;
+import com.jakewharton.threetenabp.AndroidThreeTen;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
@@ -11,8 +12,12 @@ public class MyApplication extends Application {
 
     public void onCreate() {
         super.onCreate();
+
         context = getApplicationContext();
+        AndroidThreeTen.init(this);
+
     }
+
     public static Context getAppContext() {
         return context;
     }

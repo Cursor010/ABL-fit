@@ -16,6 +16,17 @@ import java.util.HashSet;
 public final class MyHelper {
 
     public static class MyDBHelper {
+        public static void updateNote(Note note, String oldTitle) {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(DBHelper.NOTES_KEY_TITLE, note.getTitle());
+            contentValues.put(DBHelper.NOTES_KEY_CONTENT, note.getContent());
+            database.update(
+                    DBHelper.TABLE_NOTES,
+                    contentValues,
+                    DBHelper.NOTES_KEY_TITLE + " = ?",
+                    new String[]{oldTitle}
+            );
+        }
         private static final SQLiteDatabase database = new DBHelper(MyApplication.getAppContext()).getWritableDatabase();
 
         public static String[] getDatesTimeInterval(String timeInterval) {
@@ -37,54 +48,6 @@ public final class MyHelper {
             }
             return new String[] {dateStart.toString(), dateEnd.toString()};
         }
-//            public static void generateTrainingAdapter(String timeInterval, byte parent, String selectedExercise) {
-//
-//                ArrayList<Object> trainings = new ArrayList<>();
-//
-//                trainings.add(new Training("Дата", "Упражнение", "Вес", "Результат"));
-//                Cursor cursor;
-//                if (parent == STATISTICS) {
-////                    cursor = getDatabase().rawQuery("SELECT date, weight, additional_info FROM training" +
-////                            " WHERE date BETWEEN ? AND ? AND exercise = ? order By date",
-////                            new String[] {dateStart.toString(), dateEnd.toString(), selectedExercise});
-//                    cursor = MyHelper.MyDBHelper.getTrainingCursor(new String[] {"date", "weight", "additional_info", "is_record"},
-//                "date BETWEEN ? AND ? AND exercise = ?",
-//                new String[] {ge, dateEnd.toString(), selectedExercise}, "date");
-//
-//                    if (cursor.moveToNext()) {
-//                        do {
-//                            if (cursor.getString(3) == null)
-//                                trainings.add(new Training(cursor.getString(0).substring(2), null,
-//                                        cursor.getString(1), cursor.getString(2)));
-//                            else
-//                                trainings.add(new Record(cursor.getString(0).substring(2),
-//                                        cursor.getString(1), cursor.getString(2), cursor.getString(3)));
-//                        } while (cursor.moveToNext());
-//                    }
-//                    return new TrainingAdapterStatistics(trainings);
-//
-//                } else {
-//                    cursor = MyHelper.MyDBHelper.getTrainingCursor(
-//                            new String[] {"date", "exercise", "weight", "additional_info", "is_record"},
-//                            "date BETWEEN ? AND ?",
-//                            new String[] {dateStart.toString(), dateEnd.toString()}, "date");
-//
-//                if (cursor.moveToNext()) {
-//                    do {
-//                        if (cursor.getString(4) == null)
-//                            trainings.add(new Training(cursor.getString(0).substring(2),
-//                                    cursor.getString(1), cursor.getString(2), cursor.getString(3)));
-//                        else
-//                            trainings.add(new Record(cursor.getString(0).substring(2),
-//                                    cursor.getString(1), cursor.getString(2), cursor.getString(3)));
-//                    } while (cursor.moveToNext());
-//                }
-//                    trainingAdapterChronology = new TrainingAdapterChronology(trainings);
-//                }
-//                cursor.close();
-//            }
-
-
         public static class TrainingDaysFromDB {
             public static HashSet<CalendarDay> trainingDays = new HashSet<>();
             public static String dateForChronology = null;
@@ -103,7 +66,6 @@ public final class MyHelper {
                     day = Integer.parseInt(cursor.getString(0).substring(8, 10));
                     trainingDay = CalendarDay.from(year, month, day);
                     trainingDays.add(trainingDay);
-//                    if (year == LocalDate.now().getYear())
                 }
             }
 
@@ -139,17 +101,6 @@ public final class MyHelper {
         public static Cursor getTrainingCursor(String[] columns, String selection, String[] selectionArgs, String orderBy) {
             return database.query(DBHelper.TABLE_TRAINING,columns, selection, selectionArgs, null, null, orderBy);
         }
-
-//        public static Cursor getTrainingCursorSortByDate() {
-//            return database.query(DBHelper.TABLE_TRAINING, new String[] {"date", "exercise", "weight", "additional_info"},
-//                    null, null, null, null, DBHelper.TRAINING_KEY_DATE);
-//        }
-//
-//        public static Cursor getTrainingCursorSortByDateExercise() {
-//            return database.query(DBHelper.TABLE_TRAINING, new String[] {"date", "exercise", "weight", "additional_info"},
-//                    "exercise = ?", null, null, null, DBHelper.TRAINING_KEY_DATE);
-//        }
-
         public static Cursor getExerciseCursor() {
             return database.query(DBHelper.TABLE_EXERCISES, new String[] {"exercise"},
                     null, null, null, null, null);
@@ -200,20 +151,6 @@ public final class MyHelper {
             }
             return listExercises;
         }
-//        public static ArrayList<String> readTableTraining(String key) {
-//            ArrayList<String> listValues = new ArrayList<>();
-//            Cursor cursor = getTrainingCursor();
-//
-//            if (cursor.moveToNext()){
-//                int valueIndex = cursor.getColumnIndex(key);
-//                do {
-//                    listValues.add(cursor.getString(valueIndex));
-//                } while (cursor.moveToNext());
-//            }
-//            cursor.close();
-//            return listValues;
-//        }
-
         public static String personalCTFun(String date) {
             Cursor cursor = getTrainingCursor(new String[] {"date", "weight"}, null, null, null);
 

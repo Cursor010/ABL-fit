@@ -27,9 +27,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val prefs = getSharedPreferences("lastSaveDate", MODE_PRIVATE)
-//        println("2023-04-13" >= "2023-04-12")
-//        println(currentDate.plusDays(7).toString())
-//        prefs.edit().putString("lastSaveDate", currentDate.minusDays(15).toString()).apply()
         println(prefs.getString("lastSaveDate", ""))
         if (prefs.getString("lastSaveDate", "").isNullOrBlank() || prefs.getString("lastSaveDate", "").toString() <= currentDate.minusDays(7).toString()) {
             val res : Boolean = exportDB()
@@ -38,7 +35,6 @@ class MainActivity : AppCompatActivity() {
             }
             println(res)
         }
-//        prefs.edit().putString("lastSaveDate", currentDate.toString()).apply();
         // выставляем тренировочные дни при создании приложения
         MyHelper.MyDBHelper.TrainingDaysFromDB.updateTrainingDays()
         val binding = ActivityMainBinding.inflate(layoutInflater)
@@ -73,7 +69,6 @@ class MainActivity : AppCompatActivity() {
                         inputStream = FileInputStream(currentDB).channel
                         outputStream = FileOutputStream(copyDB).channel
                         outputStream.transferFrom(inputStream, 0, inputStream.size())
-                        //                            FileUtils.copy(new FileInputStream(currentDB), new FileOutputStream(copyDB));
                         Toast.makeText(this, "База данных сохранена!", Toast.LENGTH_SHORT).show()
                         true
                     } catch (ignored: IOException) {

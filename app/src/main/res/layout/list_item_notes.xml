@@ -1,54 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="7dp"
-    android:layout_marginTop="15dp"
-    android:layout_marginBottom="5dp"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
     android:background="@drawable/round_edges_note"
-    android:clickable="true">
+    android:clickable="true"
+    android:padding="8dp">
 
+    <!-- Кнопка удаления -->
     <ImageButton
         android:id="@+id/deleteNote"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:background="@drawable/button_back"
-        android:padding="30dp"
+        android:padding="8dp"
         android:src="@drawable/delete"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Заголовок -->
     <TextView
         android:id="@+id/titleNote"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="5dp"
-        android:maxLines="2"
-        android:text="title"
-        android:textSize="20sp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/deleteNote"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Дата -->
+    <TextView
+        android:id="@+id/dateNote"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/deleteNote"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleNote" />
+
+    <!-- Содержимое -->
     <TextView
         android:id="@+id/contentNote"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="17dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp"
+        android:ellipsize="end"
         android:maxLines="2"
-        android:text="content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/deleteNote"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleNote" />
+        app:layout_constraintTop_toBottomOf="@+id/dateNote" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

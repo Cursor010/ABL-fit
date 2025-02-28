@@ -31,7 +31,6 @@ public class TrainingAdapterStatistics extends RecyclerView.Adapter<RecyclerView
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//        RecyclerView.ViewHolder viewHolder;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         if (viewType == RECORD) {
             View v1 = inflater.inflate(R.layout.list_item_record_statistics, parent, false);

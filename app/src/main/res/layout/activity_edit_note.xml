@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,6 +9,7 @@
     tools:context=".ui.home.notes.EditNoteActivity"
     android:theme="@style/Theme.MyTraining">
 
+    <!-- Кнопка сохранения -->
     <ImageButton
         android:id="@+id/applyChangeNote"
         android:layout_width="45dp"
@@ -19,6 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Кнопка назад -->
     <ImageButton
         android:id="@+id/goBackButtonFromEditNotes"
         android:layout_width="45dp"
@@ -29,26 +32,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Заголовок -->
     <EditText
         android:id="@+id/editTextTitleNote"
-        android:layout_width="300dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="-10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:backgroundTint="@android:color/transparent"
-        android:ems="10"
         android:hint="Заголовок"
         android:inputType="text"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/goBackButtonFromEditNotes" />
 
+    <!-- Дата создания -->
+    <TextView
+        android:id="@+id/tvNoteDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTitleNote"
+        tools:text="Создано: 12 сент. 2023" />
+
+    <!-- Содержимое -->
     <EditText
         android:id="@+id/editTextContentNote"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="-5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="@android:color/transparent"
         android:gravity="top|start"
         android:hint="Описание"
@@ -56,7 +77,7 @@
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTitleNote" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNoteDate" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

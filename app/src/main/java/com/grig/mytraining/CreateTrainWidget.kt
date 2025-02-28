@@ -52,7 +52,6 @@ internal fun updateAppWidget(
     val views = RemoteViews(context.packageName, R.layout.create_train_widget)
     val pIntent = PendingIntent.getActivity(context, appWidgetId, Intent(context, CreateTrainActivity::class.java), 0)
     views.setOnClickPendingIntent(R.id.floatingButtonPlus2 ,pIntent);
-//    views.setTextViewText(R.id.appwidget_text, widgetText)
 
     // Instruct the widget manager to update the widget
     appWidgetManager.updateAppWidget(appWidgetId, views)

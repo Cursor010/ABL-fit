@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 public class StatisticsViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
+
     public StatisticsViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is dashboard fragment");

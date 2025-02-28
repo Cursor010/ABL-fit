@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="items_bottom_nav">#CC461B</color>
+    <color name="light_green">#008000</color>
     <color name="main_background">#1A1A1E</color>
     <color name="teal_200">#CC461B</color>
     <color name="teal_700">#FF018786</color>
@@ -10,4 +11,8 @@
     <color name="light_blue_200">#FF81D4FA</color>
     <color name="light_blue_600">#FF039BE5</color>
     <color name="light_blue_900">#FF01579B</color>
+    <color name="graph_line">#FF6F00</color>
+    <color name="graph_background">#FCE4EC</color>
+    <color name="gray">#808080</color>
+    <color name="light_gray">#B3B3B3</color>
 </resources>

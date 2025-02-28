@@ -31,8 +31,6 @@ public class CreateTrainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_train);
 
-
-
         findViewById(R.id.goBackButtonFromCreateTrain).setOnClickListener(view -> onBackPressed());
 
         autoCompleteTextView = findViewById(R.id.autoCompleteTextView);
@@ -66,11 +64,10 @@ public class CreateTrainActivity extends AppCompatActivity {
         editTextWeight.setOnFocusChangeListener((view, b) -> {
             // Проверяем зашел ли пользователь в edit text или вышел из него
             if (b && !editTextWeight.getHint().toString().equals("Введите вес")) {
-                editTextWeight.setText(editTextWeight.getHint().toString());
             }
         });
 
-        editTextWeight.setHint(MyHelper.MyDBHelper.personalCTFun(editTextDate.getHint().toString()));
+        editTextWeight.setHint("Введите вес");
 
         if (getIntent().getStringExtra("date") != null) {
             dateIntent = getIntent().getStringExtra("date");
@@ -93,12 +90,9 @@ public class CreateTrainActivity extends AppCompatActivity {
         }
 
         imageButtonMinusDate.setOnClickListener(view -> {
-
             date = date.minusDays(1);
             if (editTextWeight.getText().toString().isEmpty())
                 editTextWeight.setHint(MyHelper.MyDBHelper.personalCTFun(date.toString().substring(2)));
-            else
-                editTextWeight.setText(MyHelper.MyDBHelper.personalCTFun(date.toString().substring(2)));
             if (editTextDate.getText().toString().isEmpty())
                 editTextDate.setHint(date.toString().substring(2));
             else
@@ -108,8 +102,6 @@ public class CreateTrainActivity extends AppCompatActivity {
             date = date.minusDays(-1);
             if (editTextWeight.getText().toString().isEmpty())
                 editTextWeight.setHint(MyHelper.MyDBHelper.personalCTFun(date.toString().substring(2)));
-            else
-                editTextWeight.setText(MyHelper.MyDBHelper.personalCTFun(date.toString().substring(2)));
             if (editTextDate.getText().toString().isEmpty())
                 editTextDate.setHint(date.toString().substring(2));
             else
@@ -168,11 +160,7 @@ public class CreateTrainActivity extends AppCompatActivity {
                     if (checkBoxIsRecord.isChecked()) newIsRecord = "1";
                     contentValues.put("is_record", newIsRecord);
                     System.out.println("record " + newIsRecord + " " + isRecord);
-//                    System.out.println(editTextDateText + " " + dateIntent);
-//                    System.out.println(spinnerText + " " + exerciseIntent);
-//                    System.out.println(editTextAdditionalInfoText + " " + additionalInfoIntent);
-//                    System.out.println(editTextWeightText + " " + weightIntent);
-//                    System.out.println(isRecord);
+
                     MyHelper.MyDBHelper.getDatabase().update("training", contentValues,
                             "date = ? and exercise = ? and additional_info = ? and weight = ?",
                             new String[] {dateIntent, exerciseIntent, additionalInfoIntent, weightIntent});
