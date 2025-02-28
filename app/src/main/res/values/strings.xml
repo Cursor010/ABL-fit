@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">My Training</string>
+    <string name="title_home">Главная</string>
+    <string name="title_statistics">Статистика</string>
+    <string name="title_chronology">Хронология</string>
+    <string name="title_weight">Вес</string>
+    <string name="HomeAddExerciseFragmentConfirmText">Подтвердить</string>
+    <string name="homes_create_train_text">Создать тренировку</string>
+    <string name="homes_add_exercise_text">Добавить упражнение</string>
+    <string-array name="custom_weekdays">
+        <item>Пн</item>
+        <item>Вт</item>
+        <item>Ср</item>
+        <item>Чт</item>
+        <item>Пт</item>
+        <item>Сб</item>
+        <item>Вс</item>
+    </string-array>
+
+    <string-array name="months">
+        <item>Январь</item>
+        <item>Февраль</item>
+        <item>Март</item>
+        <item>Апрель</item>
+        <item>Май</item>
+        <item>Июнь</item>
+        <item>Июль</item>
+        <item>Август</item>
+        <item>Сентябрь</item>
+        <item>Октябрь</item>
+        <item>Ноябрь</item>
+        <item>Декабрь</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
+</resources>

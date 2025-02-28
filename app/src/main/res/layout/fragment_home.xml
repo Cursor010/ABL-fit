@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_home"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.grig.mytraining.ui.home.HomeFragment">
+
+    <!--    <com.applandeo.materialcalendarview.CalendarView-->
+    <!--        android:id="@+id/calendarView"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_marginTop="50dp"-->
+    <!--        app:abbreviationsBarColor="#1a1a1e"-->
+    <!--        app:todayLabelColor="#A3A3A3"-->
+    <!--        app:headerColor="#1A1A1E"-->
+    <!--        app:pagesColor="#1a1a1e"-->
+    <!--        app:highlightedDaysLabelsColor="@color/items_bottom_nav"-->
+    <!--        app:abbreviationsLabelsColor="#fff"-->
+    <!--        app:daysLabelsColor="#fff"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:firstDayOfWeek="2"/>-->
+    <!--    <com.prolificinteractive.materialcalendarview.MaterialCalendarView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"/>-->
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+
+    <ImageButton
+        android:id="@+id/imageButtonMySettings"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/button_back"
+        android:src="@drawable/ic_settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonMySettings"
+        app:mcv_dateTextAppearance="@style/CalendarStyle"
+        app:mcv_firstDayOfWeek="monday"
+        app:mcv_showOtherDates="none" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingButtonDumbbell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:backgroundTint="@color/items_bottom_nav"
+        android:clickable="true"
+        android:src="@drawable/dumbbell4"
+        android:visibility="invisible"
+        app:fabCustomSize="40dp"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toTopOf="@+id/floatingButtonPlus"
+        app:layout_constraintEnd_toEndOf="@+id/floatingButtonPlus" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingButtonNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="9dp"
+        android:backgroundTint="@color/items_bottom_nav"
+        android:clickable="true"
+        android:rotation="0"
+        android:rotationX="0"
+        android:rotationY="0"
+        android:src="@drawable/note1"
+        android:visibility="invisible"
+        app:fabCustomSize="40dp"
+        app:layout_constraintEnd_toStartOf="@+id/floatingButtonPlus"
+        app:layout_constraintTop_toTopOf="@+id/floatingButtonPlus" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingButtonPlus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:backgroundTint="@color/items_bottom_nav"
+        android:clickable="true"
+        android:src="@drawable/plus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="#FFFFFF" />
+
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:paddingHorizontal="115dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+
+
+    <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--                android:layout_width="228dp"-->
+    <!--                android:layout_height="150dp"-->
+    <!--                android:layout_marginHorizontal="10dp"-->
+    <!--                android:background="@drawable/round_edges_home_stat"-->
+    <!--                android:clickable="true">-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/textViewTitle1"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_marginBottom="40dp"-->
+    <!--                    android:text="Тренировок: 34"-->
+    <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                    app:layout_constraintStart_toStartOf="parent" />-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/textViewContent1"-->
+    <!--                    style="@style/CalendarStyle"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_marginTop="40dp"-->
+    <!--                    android:text="Статистика за август"-->
+    <!--                    android:textSize="16sp"-->
+    <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                    app:layout_constraintStart_toStartOf="parent"-->
+    <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+    <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--                android:layout_width="228dp"-->
+    <!--                android:layout_height="150dp"-->
+    <!--                android:layout_marginHorizontal="10dp"-->
+    <!--                android:background="@drawable/round_edges_home_stat"-->
+    <!--                android:clickable="true">-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/textViewTitle2"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_marginBottom="40dp"-->
+    <!--                    android:text="Тренировок: 34"-->
+    <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                    app:layout_constraintStart_toStartOf="parent" />-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/textViewContent2"-->
+    <!--                    style="@style/CalendarStyle"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_marginTop="40dp"-->
+    <!--                    android:text="Статистика за август"-->
+    <!--                    android:textSize="16sp"-->
+    <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                    app:layout_constraintStart_toStartOf="parent"-->
+    <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+    <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+    <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--                android:layout_width="228dp"-->
+    <!--                android:layout_height="150dp"-->
+    <!--                android:layout_marginHorizontal="10dp"-->
+    <!--                android:background="@drawable/round_edges_home_stat"-->
+    <!--                android:clickable="true">-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/textViewTitle3"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_marginBottom="40dp"-->
+    <!--                    android:text="Тренировок: 34"-->
+    <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                    app:layout_constraintStart_toStartOf="parent" />-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/textViewContent3"-->
+    <!--                    style="@style/CalendarStyle"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_marginTop="40dp"-->
+    <!--                    android:text="Статистика за август"-->
+    <!--                    android:textSize="16sp"-->
+    <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                    app:layout_constraintStart_toStartOf="parent"-->
+    <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+    <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+    <!--        </LinearLayout>-->
+    <!--    </HorizontalScrollView>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout><!--    <FrameLayout-->
+    <!--        android:id="@+id/HomeFrameLayout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent">-->
+    <!--    </FrameLayout>-->
+
+    <!--        <EditText-->
+    <!--            android:id="@+id/editTextTextPersonName"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:ems="10"-->
+    <!--            android:inputType="textPersonName"-->
+    <!--            android:text="Name" />-->
+    <!--    </FrameLayout>-->
+
+    <!--    <FrameLayout-->
+    <!--        android:id="@+id/fragmentContainerView2"-->
+    <!--        android:name="com.grig.mytraining.ui.home.CreateTrainFragment"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        tools:layout_editor_absoluteX="123dp"-->
+    <!--        tools:layout_editor_absoluteY="383dp" />-->
+
+    <!--    <androidx.fragment.app.FragmentContainerView-->
+    <!--        android:id="@+id/fragmentContainerView"-->
+    <!--        android:name="com.grig.mytraining.ui.home.CreateTrainFragment"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />-->
+
+    <!--        <androidx.fragment.app.FragmentContainerView-->
+    <!--            android:id="@+id/fragmentContainerView"-->
+    <!--            android:name="com.grig.mytraining.ui.home.AddExerciseFragment"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintHorizontal_bias="0.0"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />-->

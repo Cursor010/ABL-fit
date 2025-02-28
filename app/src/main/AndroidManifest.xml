@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:installLocation="preferExternal">
+
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyTraining"
+        tools:targetApi="31">
+        <activity
+            android:name=".DialogImportDB"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".DialogExportDB"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <receiver
+            android:name=".CreateTrainWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/create_train_widget_info" />
+        </receiver> <!-- <activity -->
+        <!-- android:name=".ui.chronology.FilterChronActivity" -->
+        <!-- android:exported="false" /> -->
+        <activity
+            android:name=".ui.home.notes.EditNoteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.home.settings.DialogAboutApp"
+            android:exported="false"
+            android:theme="@style/DialogStyle3" />
+        <activity
+            android:name=".ui.home.settings.DialogReplaceExercise"
+            android:exported="false"
+            android:theme="@style/DialogStyle2" />
+        <activity
+            android:name=".ui.home.settings.DeleteExerciseDialog"
+            android:exported="false"
+            android:theme="@style/DialogStyle" />
+        <activity
+            android:name=".ui.home.settings.SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.home.notes.NotesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.home.CreateTrainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>

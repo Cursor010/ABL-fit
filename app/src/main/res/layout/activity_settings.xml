@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#222326"
+    tools:context=".ui.home.settings.SettingsActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:keepScreenOn="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/goBackButtonFromSettings"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/button_back"
+                android:src="@drawable/arrow_left"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/TVStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="Данные"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/round_edges"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView">
+
+                <Button
+                    android:id="@+id/exportDataButton"
+                    style="@style/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:stateListAnimator="@null"
+                    android:text="Экспорт данных(В backup ИЗ bd)"
+                    android:textAlignment="viewStart" />
+
+                <Button
+                    android:id="@+id/importDataButton"
+                    style="@style/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:stateListAnimator="@null"
+                    android:text="Импорт данных(ИЗ backup В bd)"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView10"
+                style="@style/TVStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="Коррекция"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/round_edges"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView10">
+
+                <Button
+                    android:id="@+id/delExerciseButton"
+                    style="@style/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:stateListAnimator="@null"
+                    android:text="Удалить упражнение"
+                    android:textAlignment="viewStart" />
+
+                <Button
+                    android:id="@+id/replaceExerciseButton"
+                    style="@style/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:stateListAnimator="@null"
+                    android:text="Заменить упражнение"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView15"
+                style="@style/TVStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="О приложении"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/round_edges"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView15">
+
+                <Button
+                    android:id="@+id/aboutApp"
+                    style="@style/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:stateListAnimator="@null"
+                    android:text="MyTraining 3.2.3"
+                    android:textAlignment="viewStart" />
+
+                <Button
+                    android:id="@+id/donate"
+                    style="@style/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:stateListAnimator="@null"
+                    android:text="Дать разрабам на хлебушек"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView21"-->
+<!--                style="@style/TVStyle"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="8dp"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:fontFamily="@font/roboto_bold"-->
+<!--                android:text="Дизайн календаря"-->
+<!--                android:textSize="16sp"/>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/linearLayout4"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="1dp"-->
+<!--                android:background="@drawable/round_edges"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/textView21">-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/donate4"-->
+<!--                    style="@style/borderlessButtonStyle"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:stateListAnimator="@null"-->
+<!--                    android:text="Обычный оранжевый"-->
+<!--                    android:textAlignment="viewStart" />-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/donate3"-->
+<!--                    style="@style/borderlessButtonStyle"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:stateListAnimator="@null"-->
+<!--                    android:text="Обычный оранжевый"-->
+<!--                    android:textAlignment="viewStart" />-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/aboutApp2"-->
+<!--                    style="@style/borderlessButtonStyle"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:stateListAnimator="@null"-->
+<!--                    android:text="Дизайнерский"-->
+<!--                    android:textAlignment="viewStart" />-->
+<!--            </LinearLayout>-->
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

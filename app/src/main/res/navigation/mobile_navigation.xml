@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home"
+    app:labelVisibilityMode="labeled">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.grig.mytraining.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home"
+        app:labelVisibilityMode="labeled"/>
+
+    <fragment
+        android:id="@+id/navigationStatistics"
+        android:name="com.grig.mytraining.ui.statistics.StatisticsFragment"
+        android:label="@string/title_statistics"
+        tools:layout="@layout/fragment_statistics"
+        app:labelVisibilityMode="labeled"/>
+
+    <fragment
+        android:id="@+id/navigationChronology"
+        android:name="com.grig.mytraining.ui.chronology.ChronologyFragment"
+        android:label="@string/title_chronology"
+        tools:layout="@layout/fragment_chronology"
+        app:labelVisibilityMode="labeled"/>
+    <fragment
+        android:id="@+id/navigationWeight"
+        android:name="com.grig.mytraining.ui.weight.WeightFragment"
+        android:label="fragment_weight"
+        tools:layout="@layout/fragment_weight" />
+</navigation>

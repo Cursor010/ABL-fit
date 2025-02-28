@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash</item>
+    </style>
+
+    <style name="CalendarButtonStyleDefault2">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="background">@drawable/calendar_design_my_sister</item>
+    </style>
+
+    <style name="CalendarStyle">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="CalendarStyleArrows">
+        <item name="backgroundTint">@color/items_bottom_nav</item>
+    </style>
+
+    <style name="CalendarButtonStyleDefault">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="theme">@style/ThemeOverlay.MaterialComponents.MaterialCalendar</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <!--        <item name="background">@drawable/calendar_button_default</item>-->
+        <!--        <item name="background">@drawable/calendar_button_default</item>-->
+    </style>
+
+    <style name="CalendarButtonStyleSpec" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:backgroundTint">#1A1A1E</item>
+        <item name="android:textColor">@color/items_bottom_nav</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="ButtonStyle">
+        <item name="android:backgroundTint">#1A1A1E</item>
+        <item name="android:textColor">@color/items_bottom_nav</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="borderlessButtonStyle" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:backgroundTint">#1A1A1E</item>
+        <item name="android:textColor">#CFCFCF</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingStart">15dp</item>
+        <item name="android:paddingTop">8dp</item>
+    </style>
+
+    <style name="TVStyle">
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textColor">@color/items_bottom_nav</item>
+    </style>
+
+    <style name="CalendarTVStyle">
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/items_bottom_nav</item>
+    </style>
+
+    <style name="DialogStyle" parent="Base.Theme.AppCompat.Dialog.FixedSize">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowFixedWidthMajor">90%</item>
+        <item name="windowFixedHeightMajor">20%</item>
+    </style>
+
+    <style name="DialogNoteStyle" parent="Base.Theme.AppCompat.Dialog.FixedSize">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowFixedWidthMajor">90%</item>
+        <item name="windowFixedHeightMajor">30%</item>
+    </style>
+
+    <style name="DialogStyle2" parent="Base.Theme.AppCompat.Dialog.FixedSize">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowFixedWidthMajor">90%</item>
+        <item name="windowFixedHeightMajor">27%</item>
+    </style>
+
+    <style name="DialogStyle3" parent="Base.Theme.AppCompat.Dialog.FixedSize">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowFixedWidthMajor">90%</item>
+        <item name="windowFixedHeightMajor">80%</item>
+    </style>
+
+    <style name="Widget.MyTraining.AppWidget.Container" parent="android:Widget">
+        <item name="android:id">@android:id/background</item>
+        <item name="android:background">?android:attr/colorBackground</item>
+    </style>
+
+    <style name="Widget.MyTraining.AppWidget.InnerView" parent="android:Widget">
+        <item name="android:background">?android:attr/colorBackground</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+</resources>
