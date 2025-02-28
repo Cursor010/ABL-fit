@@ -18,7 +18,7 @@
 ## Screenshots
 | Main Screen | Chronology | Weight Tracking |
 |-------------|------------|-----------------|
-| ![Main](https://github.com/Cursor010/ABL-fit/blob/main/img/Main.png) | ![Сhronology](https://github.com/Cursor010/ABL-fit/blob/main/img/Сhronology.png) | ![Weight](https://github.com/Cursor010/ABL-fit/blob/main/img/Weight.png) |
+| ![Main](https://github.com/Cursor010/ABL-fit/blob/main/img/Main.jpg) | ![Сhronology](https://github.com/Cursor010/ABL-fit/blob/main/img/%D0%A1hronology.png) | ![Weight](https://github.com/Cursor010/ABL-fit/blob/main/img/Weight.jpg) |
 
 | Settings | Add Training | Notes |
 |----------|--------------|-------|
